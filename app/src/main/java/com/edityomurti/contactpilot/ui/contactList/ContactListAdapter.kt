@@ -1,5 +1,6 @@
 package com.edityomurti.contactpilot.ui.contactList
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +25,9 @@ class ContactListAdapter(val contactsClickListener: ContactsClickListener) :
 
         holder.tvName.text = "${contact.firstName ?: ""} ${contact.lastName ?: ""}"
 
+        holder.itemView.isClickable = true
         holder.itemView.setOnClickListener {
+            Log.i("", "CLICKED!!")
             contactsClickListener.onClick(contact)
         }
     }

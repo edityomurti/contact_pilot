@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.edityomurti.contactpilot.data.Contact
 import com.edityomurti.contactpilot.ui.contactList.ContactListAdapter
 import com.edityomurti.contactpilot.ui.contactList.ContactsClickListener
@@ -12,8 +13,9 @@ import com.google.gson.reflect.TypeToken
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var rvContacts: RecyclerView
     lateinit var contactAdapter: ContactListAdapter
+    lateinit var rvContacts: RecyclerView
+    lateinit var swipeRefresh: SwipeRefreshLayout
 
     var datas: MutableList<Contact> = mutableListOf()
 
@@ -26,11 +28,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindView() {
         rvContacts = findViewById(R.id.rv_contacts)
+        swipeRefresh = findViewById(R.id.swipe_refresh)
 
         contactAdapter = ContactListAdapter(ContactsClickListener {  })
         val layoutManager = LinearLayoutManager(this)
         rvContacts.adapter = contactAdapter
         rvContacts.layoutManager = layoutManager
+
+        swipeRefresh.setOnRefreshListener {
+            getData()
+        }
     }
 
     private fun getData() {
@@ -44,5 +51,6 @@ class MainActivity : AppCompatActivity() {
         datas.addAll(contacts)
 
         contactAdapter.submitList(datas)
+        swipeRefresh.isRefreshing = false
     }
 }
