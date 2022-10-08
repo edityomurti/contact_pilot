@@ -27,7 +27,6 @@ class ContactListAdapter(val contactsClickListener: ContactsClickListener) :
 
         holder.itemView.isClickable = true
         holder.itemView.setOnClickListener {
-            Log.i("", "CLICKED!!")
             contactsClickListener.onClick(contact)
         }
     }

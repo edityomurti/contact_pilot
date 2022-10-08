@@ -4,4 +4,6 @@
     <color name="secondary">#A25F0F</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#F0F0F0</color>
+    <color name="grey_dark">#BEBEBE</color>
 </resources>
